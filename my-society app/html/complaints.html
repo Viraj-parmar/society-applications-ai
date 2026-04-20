@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaints - SocietyHub</title>
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../asset/css/style.css">
+  <link rel="stylesheet" href="../asset/mediaquery/media.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header" style="justify-content: space-between; width: 100%;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <i class="ph-fill ph-buildings logo-icon"></i>
+        <span class="logo-text">SocietyHub</span>
+      </div>
+      <button id="mobileCloseBtn" onclick="document.getElementById('sidebar').classList.remove('show'); document.getElementById('sidebar-overlay').style.opacity='0'; setTimeout(()=>document.getElementById('sidebar-overlay').style.display='none',300);" class="mobile-close-btn" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: none;"><i class="ph ph-x"></i></button>
+    </div>
+    
+    <div class="user-profile">
+      <div class="user-name">John doe</div>
+      <div class="user-flat">Flat a-101</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="../index.html" class="nav-item">
+        <i class="ph ph-squares-four"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="./maintenance.html" class="nav-item">
+        <i class="ph ph-wallet"></i>
+        <span>Maintenance</span>
+      </a>
+      <a href="./complaints.html" class="nav-item active">
+        <i class="ph ph-chat-teardrop"></i>
+        <span>Complaints</span>
+      </a>
+      <a href="./events.html" class="nav-item">
+        <i class="ph ph-calendar-blank"></i>
+        <span>Events</span>
+      </a>
+      <a href="./amenities.html" class="nav-item">
+        <i class="ph ph-swimming-pool"></i>
+        <span>Amenities</span>
+      </a>
+      <a href="./notice-board.html" class="nav-item">
+        <i class="ph ph-megaphone"></i>
+        <span>Notice Board</span>
+      </a>
+      <a href="./report.html" class="nav-item">
+        <i class="ph ph-chart-bar"></i>
+        <span>Reports</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item sign-out">
+        <i class="ph ph-sign-out"></i>
+        <span>Sign Out</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="d-flex align-center">
+        <button class="mobile-menu-btn" id="menuBtn">
+          <i class="ph ph-list"></i>
+        </button>
+        <h1>Complaints</h1>
+      </div>
+      <div class="header-actions">
+        <button class="notif-btn">
+          <i class="ph ph-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content-grid">
+      <p class="page-subtitle">View and lodge new complaints.</p>
+      
+      <div class="complaint-grid" id="complaintsContainer">
+        <!-- Items loaded dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <script src="../asset/javascript/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocietyHub Dashboard</title>
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="asset/css/style.css">
+  <link rel="stylesheet" href="asset/mediaquery/media.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header" style="justify-content: space-between; width: 100%;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <i class="ph-fill ph-buildings logo-icon"></i>
+        <span class="logo-text">SocietyHub</span>
+      </div>
+      <button id="mobileCloseBtn" onclick="document.getElementById('sidebar').classList.remove('show'); document.getElementById('sidebar-overlay').style.opacity='0'; setTimeout(()=>document.getElementById('sidebar-overlay').style.display='none',300);" class="mobile-close-btn" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; display: none;"><i class="ph ph-x"></i></button>
+    </div>
+    
+    <div class="user-profile">
+      <div class="user-name">John doe</div>
+      <div class="user-flat">Flat a-101</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item active">
+        <i class="ph ph-squares-four"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="./html/maintenance.html" class="nav-item">
+        <i class="ph ph-wallet"></i>
+        <span>Maintenance</span>
+      </a>
+      <a href="./html/complaints.html" class="nav-item">
+        <i class="ph ph-chat-teardrop"></i>
+        <span>Complaints</span>
+      </a>
+      <a href="./html/events.html" class="nav-item">
+        <i class="ph ph-calendar-blank"></i>
+        <span>Events</span>
+      </a>
+      <a href="./html/amenities.html" class="nav-item">
+        <i class="ph ph-swimming-pool"></i>
+        <span>Amenities</span>
+      </a>
+      <a href="./html/notice-board.html" class="nav-item">
+        <i class="ph ph-megaphone"></i>
+        <span>Notice Board</span>
+      </a>
+      <a href="./html/report.html" class="nav-item">
+        <i class="ph ph-chart-bar"></i>
+        <span>Reports</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="nav-item sign-out">
+        <i class="ph ph-sign-out"></i>
+        <span>Sign Out</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="d-flex align-center">
+        <button class="mobile-menu-btn" id="menuBtn">
+          <i class="ph ph-list"></i>
+        </button>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="header-actions">
+        <button class="notif-btn">
+          <i class="ph ph-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Card 1 -->
+      <div class="dash-card">
+        <div class="card-top">
+          <span class="card-title">Pending Payments</span>
+          <div class="icon-wrapper icon-cyan">
+            <i class="ph ph-credit-card"></i>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <h2 class="card-value" id="maintenanceCount">0</h2>
+          <span class="card-subtitle">Maintenance dues</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="dash-card">
+        <div class="card-top">
+          <span class="card-title">Active Complaints</span>
+          <div class="icon-wrapper icon-red">
+            <i class="ph ph-chat-teardrop-text"></i>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <h2 class="card-value" id="complaintsCount">0</h2>
+          <span class="card-subtitle">Being processed</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="dash-card">
+        <div class="card-top">
+          <span class="card-title">Upcoming Events</span>
+          <div class="icon-wrapper icon-green">
+            <i class="ph ph-calendar-blank"></i>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <h2 class="card-value" id="eventsCount">0</h2>
+          <span class="card-subtitle">This month</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="dash-card">
+        <div class="card-top">
+          <span class="card-title">Active Notices</span>
+          <div class="icon-wrapper icon-yellow">
+            <i class="ph ph-megaphone"></i>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <h2 class="card-value" id="noticesCount">0</h2>
+          <span class="card-subtitle">Important updates</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="events-section">
+      <div class="events-header">
+        <h3>Upcoming Events</h3>
+        <p>Society events happening soon</p>
+      </div>
+      <div class="events-body">
+        <div id="eventsList" class="empty-state">
+          No upcoming events at the moment
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="asset/javascript/script.js"></script>
+</body>
+</html>

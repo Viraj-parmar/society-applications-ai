@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - SocietyHub</title>
+  
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f8fafc;
+      overflow: hidden;
+    }
+
+    /* Auth check directly inline to eliminate FOUC */
+    script { display: none; }
+
+    .brand-side {
+      display: none;
+    }
+    @media (min-width: 900px) {
+      .brand-side {
+        display: flex;
+        flex: 1;
+        background: linear-gradient(135deg, #091319 0%, #1a2732 100%);
+        color: white;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 4rem 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .brand-side::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+        top: -100px;
+        left: -100px;
+        border-radius: 50%;
+      }
+      .brand-side::after {
+        content: '';
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+        bottom: -200px;
+        right: -200px;
+        border-radius: 50%;
+      }
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 10;
+    }
+    .logo-container i {
+      font-size: 2.25rem;
+      color: #0ea5e9;
+    }
+    .logo-container span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-message {
+      z-index: 10;
+      margin-top: 4rem;
+    }
+    .brand-message h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .brand-message p {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      max-width: 450px;
+    }
+
+    .auth-side {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: white;
+      position: relative;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      animation: formSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    @keyframes formSlideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .auth-header {
+      margin-bottom: 2.5rem;
+    }
+    .auth-header h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    .auth-header p {
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 0.5rem;
+    }
+    
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    .input-wrapper i {
+      position: absolute;
+      left: 1rem;
+      color: #94a3b8;
+      font-size: 1.25rem;
+      transition: color 0.2s;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 3rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.5rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.2s;
+      background-color: white;
+    }
+    .form-control:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+    }
+    .form-control:focus + i {
+      color: #0ea5e9;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+    }
+    .submit-btn:hover {
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.35);
+      transform: translateY(-1px);
+    }
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .toggle-text {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .toggle-text a {
+      color: #0ea5e9;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .toggle-text a:hover {
+      color: #0284c7;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      background: #ef4444;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 500;
+      transform: translateY(-100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 100;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+  <link rel="stylesheet" href="../asset/mediaquery/media.css">
+</head>
+<body>
+
+  <!-- Pre-load Auth Check -->
+  <script>
+    if(localStorage.getItem('currentUser')) {
+      window.location.href = '../index.html';
+    }
+  </script>
+
+  <div class="brand-side">
+    <div class="logo-container">
+      <i class="ph-fill ph-buildings"></i>
+      <span>SocietyHub</span>
+    </div>
+    
+    <div class="brand-message">
+      <h1>Smart living,<br>Seamless management.</h1>
+      <p>Join redefining community interactions. Handle maintenance, raise tickets, and book amenities instantly.</p>
+    </div>
+    <div></div> <!-- Empty div for flex space-between balancing -->
+  </div>
+
+  <div class="auth-side">
+    <div id="error-toast" class="toast">
+      <i class="ph ph-warning-circle" style="font-size: 1.5rem;"></i>
+      <span id="error-msg">Invalid credentials.</span>
+    </div>
+
+    <!-- Login Form -->
+    <div class="auth-card" id="login-view">
+      <div class="auth-header">
+        <h2>Welcome back</h2>
+        <p>Please enter your details to sign in.</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label>Username or Flat Number</label>
+          <div class="input-wrapper">
+            <input type="text" id="login-house" class="form-control" placeholder="e.g. admin or Flat A-101" required>
+            <i class="ph ph-user-circle"></i>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="login-pass" class="form-control" placeholder="••••••••" required>
+            <i class="ph ph-lock-key"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Sign In</button>
+      </form>
+
+      <div class="toggle-text">
+        Don't have an account? <a onclick="toggleView('signup')">Create one here</a>
+      </div>
+    </div>
+
+
+    <!-- Signup Form -->
+    <div class="auth-card hidden" id="signup-view">
+      <div class="auth-header">
+        <h2>Create an account</h2>
+        <p>Join your society network today.</p>
+      </div>
+
+      <form id="signup-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <div class="input-wrapper">
+            <input type="text" id="signup-name" class="form-control" placeholder="e.g. John Doe" required>
+            <i class="ph ph-user"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>House / Flat Number</label>
+          <div class="input-wrapper">
+            <input type="text" id="signup-house" class="form-control" placeholder="e.g. Flat A-101" required>
+            <i class="ph ph-door"></i>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="signup-pass" class="form-control" placeholder="Create a password" required>
+            <i class="ph ph-lock-key"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Sign Up</button>
+      </form>
+
+      <div class="toggle-text">
+        Already a resident? <a onclick="toggleView('login')">Sign in instead</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+function toggleView(view) {
+      const login = document.getElementById('login-view');
+      const signup = document.getElementById('signup-view');
+      
+      if(view === 'signup') {
+        login.classList.add('hidden');
+        signup.classList.remove('hidden');
+      } else {
+        signup.classList.add('hidden');
+        login.classList.remove('hidden');
+      }
+    }
+
+    function showError(msg) {
+      const toast = document.getElementById('error-toast');
+      document.getElementById('error-msg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // SIGN UP LOGIC
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const house = document.getElementById('signup-house').value.trim();
+      const pass = document.getElementById('signup-pass').value;
+
+      if(!name || !house || !pass) return showError('Please fill all fields');
+
+      let users = JSON.parse(localStorage.getItem('societyUsers') || '[]');
+      if(users.some(u => u.house.toLowerCase() === house.toLowerCase())) {
+        return showError('House number already registered!');
+      }
+
+      const newUser = { id: Date.now(), name, house, pass };
+      users.push(newUser);
+      localStorage.setItem('societyUsers', JSON.stringify(users));
+
+      // Auto login immediately
+      localStorage.setItem('currentUser', JSON.stringify({ name: newUser.name, house: newUser.house }));
+      window.location.href = '../index.html';
+    });
+
+    // LOGIN LOGIC
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const house = document.getElementById('login-house').value.trim();
+      const pass = document.getElementById('login-pass').value;
+
+      if(!house || !pass) return showError('Please fill all fields');
+
+      if (house.toLowerCase() === 'admin' && pass === 'admin123') {
+        localStorage.setItem('currentUser', JSON.stringify({ name: 'Society Admin', house: 'Admin Office', role: 'admin' }));
+        window.location.href = '../index.html';
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem('societyUsers') || '[]');
+      let user = users.find(u => (u.house.toLowerCase() === house.toLowerCase() || u.name.toLowerCase() === house.toLowerCase()) && u.pass === pass);
+
+      if(user) {
+        localStorage.setItem('currentUser', JSON.stringify({ name: user.name, house: user.house, role: 'user' }));
+        window.location.href = '../index.html';
+      } else {
+        showError('Incorrect credentials. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

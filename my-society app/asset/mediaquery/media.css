@@ -1,0 +1,60 @@
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .amenity-grid,
+  .complaint-grid,
+  .event-grid,
+  .maintenance-grid,
+  .notice-grid,
+  .report-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -100%;
+    transition: left 0.3s ease;
+    z-index: 9999;
+  }
+  
+  .sidebar.show {
+    left: 0 !important;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    position: relative;
+    z-index: 10001; /* Stay above sidebar */
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-menu-btn.active-btn {
+    color: #fff !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .amenity-grid,
+  .complaint-grid,
+  .event-grid,
+  .maintenance-grid,
+  .notice-grid,
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
+}
